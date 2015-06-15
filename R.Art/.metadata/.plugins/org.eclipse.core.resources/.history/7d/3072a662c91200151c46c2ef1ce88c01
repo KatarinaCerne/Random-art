@@ -1,0 +1,17 @@
+
+
+
+public class Mod extends Operatorji {
+		Operatorji podizraz;
+		public Mod(Operatorji podizraz) {
+			super(2);
+			this.podizraz = podizraz;
+		}
+		
+		public double[] eval(double u, double v){
+			double[] vektor = podizraz.eval(u, v);
+			
+			return vektor;
+		}
+	}
+//ta razred ni dokoncan

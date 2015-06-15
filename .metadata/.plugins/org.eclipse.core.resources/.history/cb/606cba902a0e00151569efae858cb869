@@ -1,0 +1,26 @@
+
+package Operatorji;
+//import java.awt.Color;
+
+public class Vsota extends Operatorji{
+	Operatorji podizraz1, podizraz2;
+	public Vsota(int vrednost) {
+		podizraz1 = Operatorji.ustvari_operator();
+		podizraz2 = Operatorji.ustvari_operator();
+	}
+	
+	public double[] povprecje (double[] vektor1, double[] vektor2, double w) {
+		
+	    double r = w * vektor1[0] + (1 - w) * vektor2[0];
+	    double g = w * vektor1[1] + (1 - w) * vektor2[1];
+	    double b = w * vektor1[2] + (1 - w) * vektor2[2];
+	    
+	    double[] rgb_vektor = {r,g,b};
+	    
+		return rgb_vektor;
+	}
+	
+	public double[] eval(double u, double v){
+		return povprecje(podizraz1.eval(u, v), podizraz2.eval(u, v),0.5);
+	}
+}

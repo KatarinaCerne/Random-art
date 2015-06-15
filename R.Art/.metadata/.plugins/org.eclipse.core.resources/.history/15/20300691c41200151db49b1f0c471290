@@ -1,0 +1,27 @@
+
+public class Vsota extends Operatorji{
+	private Operatorji podizraz1;
+	private Operatorji podizraz2;
+
+	public Vsota(Operatorji podizraz1, Operatorji podizraz2) {
+		super(2);
+		this.podizraz1 = podizraz1;
+		this.podizraz2 = podizraz2;
+	}
+	
+	
+	public static double[] povprecje (double[] vektor1, double[] vektor2, double w) {
+		
+	    double r = w * vektor1[0] + (1 - w) * vektor2[0];
+	    double g = w * vektor1[1] + (1 - w) * vektor2[1];
+	    double b = w * vektor1[2] + (1 - w) * vektor2[2];
+	    
+	    double[] rgb_vektor = {r,g,b};
+	    
+		return rgb_vektor;
+	}
+	
+	public double[] eval(double u, double v){
+		return povprecje(podizraz1.eval(u, v), podizraz2.eval(u, v),0.5);
+	}
+}

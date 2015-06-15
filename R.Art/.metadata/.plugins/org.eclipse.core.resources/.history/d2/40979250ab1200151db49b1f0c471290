@@ -1,0 +1,28 @@
+
+
+
+
+//import java.util.Random;
+
+//import java.awt.Color;
+//import java.util.Random;
+
+public abstract class Operatorji {
+
+private int arity;
+private Operatorji[] tabela_operatorjev;
+private int n;
+
+public Operatorji(int arity) {	
+	this.arity = arity;
+	this.tabela_operatorjev = new Operatorji[arity];
+	this.n = 0;
+}
+
+public void dodaj_operator(Operatorji operator){
+	
+}
+
+public abstract double[] eval(double u, double v);
+}
+

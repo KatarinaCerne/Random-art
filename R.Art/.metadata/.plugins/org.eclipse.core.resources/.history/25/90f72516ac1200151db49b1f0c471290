@@ -1,0 +1,22 @@
+
+
+
+	public class Produkt extends Operatorji{
+		Operatorji podizraz1, podizraz2;
+		public Produkt(int globina) {
+			podizraz1 = Operatorji.ustvari_operator(globina - 1);
+			podizraz2 = Operatorji.ustvari_operator(globina - 1);
+		}
+		
+		public double[] eval(double u, double v){
+			double[] vektor1 = podizraz1.eval(u, v);
+			double[] vektor2 = podizraz2.eval(u, v);
+			
+			double r = vektor1[0] * vektor2[0];
+			double g = vektor1[1] * vektor2[1];
+			double b = vektor1[2] * vektor2[2];
+			
+			double[] rgb_vektor = {r,g,b};
+			return rgb_vektor;
+		}
+	}

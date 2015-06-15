@@ -1,0 +1,22 @@
+
+package Operatorji;
+
+
+//import java.util.Random;
+
+//import java.awt.Color;
+//import java.util.Random;
+
+public abstract class Operatorji {
+
+public Operatorji() {
+	super();	
+}
+public static Operatorji ustvari_operator(int globina) {
+	return new Konstanta();
+
+	}
+
+public abstract double[] eval(double u, double v);
+}
+

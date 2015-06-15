@@ -1,0 +1,23 @@
+package Operatorji;
+
+//import java.awt.Color;
+import java.util.Random;
+
+public class Konstanta extends Operatorji {
+	public Konstanta(){
+
+	}
+
+	@Override
+	public double[] eval(double u, double v) {
+		Random random_generator1 = new Random();
+		Random random_generator2 = new Random();
+		Random random_generator3 = new Random();
+		double a = 2*random_generator1.nextDouble() - 1;
+		double b = 2*random_generator2.nextDouble() - 1;
+		double c = 2*random_generator3.nextDouble() - 1;
+		double[] konstanta = {a,b,c};
+		return konstanta;
+	}
+
+}

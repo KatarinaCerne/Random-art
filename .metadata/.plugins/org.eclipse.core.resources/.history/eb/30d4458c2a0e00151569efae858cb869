@@ -1,0 +1,17 @@
+package Operatorji;
+
+import Operatorji.Operatorji;
+
+public class Mod extends Operatorji {
+		Operatorji podizraz;
+		public Mod(int vrednost) {
+			podizraz = Operatorji.ustvari_operator();
+		}
+		
+		public double[] eval(double u, double v){
+			double[] vektor = podizraz.eval(u, v);
+			
+			return vektor;
+		}
+	}
+//ta razred ni dokoncan
