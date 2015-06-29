@@ -2,10 +2,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.color.ColorSpace;
-//import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
-//import java.awt.image.RenderedImage;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -17,17 +15,18 @@ public class Slika extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	BufferedImage slika;
-	BufferedImage original;
-	boolean sivina;
-	boolean crno_belo;
-	private BufferedImage zacetna;
-	int w = 0;
-	int h = 0;
-	int svetl;
-	int rdeca;
-	int zelena;
-	int modra;
+	BufferedImage slika; //slika, ki se bo narisala
+	BufferedImage original; //pomožna slika, ki jo uporabljamo pri sliderjih
+	private BufferedImage zacetna; //pomožna slika, ki se ne spreminja, uporabimo pri razveljavi
+	boolean sivina; //ali je slika siva
+	boolean crno_belo; //ali je slika èrno-bela
+	
+	int w = 0; //širina
+	int h = 0; //višina
+	int svetl; //sprememba svetlosti
+	int rdeca; //spremembna rdeèe
+	int zelena; //sprememba zelene
+	int modra; //sprememba modre
 	
 	public Slika(int dolzina, int sirina){
 		super();
@@ -42,26 +41,19 @@ public class Slika extends JPanel{
 		rdeca = 100;
 		zelena = 100;
 		modra = 100;
-
-		
 	}
 	
     public void sivina(BufferedImage s){
+    	//sliko pretvori v grayscale (sivo)
         ColorConvertOp op = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
         op.filter(s, slika);
         op.filter(s, original);
-        //op.filter(s, original_barva);
         sivina = true;
         repaint();
-        
-//		slika = new BufferedImage(w, h, BufferedImage.TYPE_USHORT_GRAY);
-//		Graphics g = slika.getGraphics();
-//		g.drawImage(s, 0, 0, null); 
-//		g.dispose();
-//		repaint();
     }
 	
 	public void crnoBela(BufferedImage s){
+		//sliko pretvori v èrno-belo
 		slika = new BufferedImage(w, h, BufferedImage.TYPE_BYTE_BINARY);
 		Graphics g = slika.getGraphics();
 		g.drawImage(s, 0, 0, null); 
@@ -71,6 +63,7 @@ public class Slika extends JPanel{
 	}
 	
 	public void razveljavi(BufferedImage s){
+		//razveljavi vsako oblikovanje (svetloba, barve,...)
 		BufferedImage novaSlika = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 		for (int y=0; y < s.getHeight(); y += 1) {
 			for (int x=0; x < s.getWidth(); x += 1) {
@@ -84,6 +77,7 @@ public class Slika extends JPanel{
 	}
 	
 	   public void svetlostINbarva(BufferedImage s) {
+		   //spremeni svetlost in vsebnost posamezne barve
 			BufferedImage novaSlika = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 			for (int y=0; y < s.getHeight(); y += 1) {
 				for (int x=0; x < s.getWidth(); x += 1) {
@@ -101,6 +95,7 @@ public class Slika extends JPanel{
 		}
 	
 	public int rgb(double[] rgb_vektor) {
+		//pretvori rgb vrednosti iz [-1,1] na [0,255]
 		int r = Math.max(0, Math.min(255,(int)(128*(rgb_vektor[0]+1))));
 		int g = Math.max(0, Math.min(255, (int)(128*(rgb_vektor[1]+1))));
 		int b = Math.max(0, Math.min(255, (int)(128*(rgb_vektor[2]+1))));
@@ -118,7 +113,6 @@ public class Slika extends JPanel{
 		for (int y=0; y < slika.getHeight(); y+=1) {
 			repaint();
 			for (int x=0; x < slika.getWidth(); x+=1){
-		
 				double u = x * 2.0/slika.getWidth() - 1.0;
 				double v = y * 2.0/slika.getHeight() - 1.0;
 				int rgb = rgb(operator.eval(u, v));

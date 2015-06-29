@@ -56,6 +56,7 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 	private JSlider bSlider;
 	private JButton RazveljaviButton;
 
+	//max, min in zaèetna vrednost za SvetlostSlider
 	static final int FPS_MIN = -80;
 	static final int FPS_MAX = 80;
 	static final int FPS_INIT = 0; 
@@ -141,109 +142,98 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 		RazveljaviButton.addActionListener(this);
 		add(RazveljaviButton, c);
     
-	//slider za svetlost
-	c = new GridBagConstraints();
-	c.gridx = 2;
-	c.gridy = 5;
-	c.weightx = 2;
-	c.weighty = 1;
-	SvetlostSlider = new JSlider(JSlider.HORIZONTAL,
-            FPS_MIN, FPS_MAX, FPS_INIT);
-	SvetlostSlider.addChangeListener(this);
-	SvetlostSlider.setMajorTickSpacing(10);
-	SvetlostSlider.setMinorTickSpacing(10);
-	SvetlostSlider.setPaintTicks(true);
-	SvetlostSlider.setPaintLabels(true);
+		//slider za svetlost
+		c = new GridBagConstraints();
+		c.gridx = 2;
+		c.gridy = 5;
+		c.weightx = 2;
+		c.weighty = 1;
+		SvetlostSlider = new JSlider(JSlider.HORIZONTAL,
+				FPS_MIN, FPS_MAX, FPS_INIT);
+		SvetlostSlider.addChangeListener(this);
+		SvetlostSlider.setMajorTickSpacing(10);
+		SvetlostSlider.setMinorTickSpacing(10);
+		SvetlostSlider.setPaintTicks(true);
+		SvetlostSlider.setPaintLabels(true);
 	
+		//namesto številk pod SvetlostSliderjem napis "temna" in "svetla"
+		Hashtable labelTable = new Hashtable();
+		labelTable.put( new Integer( FPS_MIN ), new JLabel("Temna") );
+		labelTable.put( new Integer( FPS_MAX ), new JLabel("Svetla") );
+		SvetlostSlider.setLabelTable( labelTable );
+		SvetlostSlider.setPaintLabels(true);
+		
+		//okvir z naslovom za SvetlostSlider
+		TitledBorder title;
+		title = BorderFactory.createTitledBorder("Svetlost");
+		SvetlostSlider.setBorder(title);
 	
-//	Font font = new Font("Serif", Font.ITALIC, 12);
-//	SvetlostSlider.setFont(font);
+		add(SvetlostSlider,c);
 	
-	Hashtable labelTable = new Hashtable();
-	labelTable.put( new Integer( FPS_MIN ), new JLabel("Temna") );
-	//labelTable.put( new Integer( FPS_INIT ), new JLabel("Original") );
-	labelTable.put( new Integer( FPS_MAX ), new JLabel("Svetla") );
-	SvetlostSlider.setLabelTable( labelTable );
-	SvetlostSlider.setPaintLabels(true);
+		//slider za rdeèo
+		c = new GridBagConstraints();
+		c.gridx = 2;
+		c.gridy = 6;
+		c.weightx = 2;
+		c.weighty = 1;
+		rSlider = new JSlider(JSlider.HORIZONTAL,0,100,100);
+		add(rSlider,c);
+		rSlider.addChangeListener(this);
+		rSlider.setMajorTickSpacing(20);
+		rSlider.setMinorTickSpacing(10);
+		rSlider.setPaintTicks(true);
+		rSlider.setPaintLabels(true);
 	
-    TitledBorder title;
-    title = BorderFactory.createTitledBorder("Svetlost");
-    SvetlostSlider.setBorder(title);
-	
-	add(SvetlostSlider,c);
-	
-	c = new GridBagConstraints();
-	c.gridx = 2;
-	c.gridy = 6;
-	c.weightx = 2;
-	c.weighty = 1;
-    rSlider = new JSlider(JSlider.HORIZONTAL,0,100,100);
-    add(rSlider,c);
-	rSlider.addChangeListener(this);
-	rSlider.setMajorTickSpacing(20);
-	rSlider.setMinorTickSpacing(10);
-	rSlider.setPaintTicks(true);
-	rSlider.setPaintLabels(true);
-	
-    TitledBorder titleR;
-    titleR = BorderFactory.createTitledBorder("Rdeèa");
-    rSlider.setBorder(titleR);
-	
-    //add(new Label("Rdeèa"),c);
+		//okvir z naslovom za rSlider
+		TitledBorder titleR;
+		titleR = BorderFactory.createTitledBorder("Rdeèa");
+		rSlider.setBorder(titleR);
     
     
-   
-    
-	//c = new GridBagConstraints();
-	c.gridx = 3;
-	c.gridy = 6;
-	c.weightx = 2;
-	c.weighty = 1;
-    gSlider = new JSlider(JSlider.HORIZONTAL,0,100,100);
-    add(gSlider,c);
-	gSlider.addChangeListener(this);
-	gSlider.setMajorTickSpacing(20);
-	gSlider.setMinorTickSpacing(10);
-	gSlider.setPaintTicks(true);
-	gSlider.setPaintLabels(true);
+		//slider za zeleno
+		c.gridx = 3;
+		c.gridy = 6;
+		c.weightx = 2;
+		c.weighty = 1;
+		gSlider = new JSlider(JSlider.HORIZONTAL,0,100,100);
+		add(gSlider,c);
+		gSlider.addChangeListener(this);
+		gSlider.setMajorTickSpacing(20);
+		gSlider.setMinorTickSpacing(10);
+		gSlider.setPaintTicks(true);
+		gSlider.setPaintLabels(true);
 	
-    TitledBorder titleG;
-    titleG = BorderFactory.createTitledBorder("Zelena");
-    gSlider.setBorder(titleG);
+		//okvir z naslovom za gSlider
+		TitledBorder titleG;
+		titleG = BorderFactory.createTitledBorder("Zelena");
+		gSlider.setBorder(titleG);
 	
-    //add(new Label("Zelena"),c);
-    
-	//c = new GridBagConstraints();
-	c.gridx = 4;
-	c.gridy = 6;
-	c.weightx = 2;
-	c.weighty = 1;
-    bSlider = new JSlider(JSlider.HORIZONTAL,0,100,100);
-    add(bSlider,c);
-	bSlider.addChangeListener(this);
-	bSlider.setMajorTickSpacing(20);
-	bSlider.setMinorTickSpacing(10);
-	bSlider.setPaintTicks(true);
-	bSlider.setPaintLabels(true);
+
+		//slider za modro
+		c.gridx = 4;
+		c.gridy = 6;
+		c.weightx = 2;
+		c.weighty = 1;
+		bSlider = new JSlider(JSlider.HORIZONTAL,0,100,100);
+		add(bSlider,c);
+		bSlider.addChangeListener(this);
+		bSlider.setMajorTickSpacing(20);
+		bSlider.setMinorTickSpacing(10);
+		bSlider.setPaintTicks(true);
+		bSlider.setPaintLabels(true);
 	
-    TitledBorder titleB;
-    titleB = BorderFactory.createTitledBorder("Modra");
-    bSlider.setBorder(titleB);
-    
-//    TitledBorder titleC;
-//    titleC = BorderFactory.createTitledBorder("Vsebnost posamezne barve");
-//    c.setBorder(titleC);
-//	
-    //add(new Label("Modra"),c);
-	
+		//okvir z naslovom za bSlider
+		TitledBorder titleB;
+		titleB = BorderFactory.createTitledBorder("Modra");
+		bSlider.setBorder(titleB);
 	}
 
 	public void stateChanged(ChangeEvent e) {
-	    //JSlider source = (JSlider)e.getSource();
 	    if (e.getSource()==SvetlostSlider){
 	    if (!SvetlostSlider.getValueIsAdjusting()) {
 	    	if (slika.crno_belo){
-	    		//SvetlostSlider.setValue(0);
+	    		//èrno-beli sliki ne bomo spreminjali svetlobe
+	    		//naredimo error sporoèilo
 	    		JOptionPane.showMessageDialog(null,
 	    			    "Èrno-beli sliki ni dovoljeno spreminjati svetlobe.",
 	    			    "Error",
@@ -260,7 +250,8 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 	    }
 	    else if (e.getSource()==rSlider){
 	    	if (slika.crno_belo || slika.sivina){
-	    		//rSlider.setValue(100);
+	    		//èrno-beli in sivi sliki ne moremo spreminjati barv
+	    		//naredimo error sporoèilo
 	    		JOptionPane.showMessageDialog(null,
 	    			    "Èrno-beli ali sivi sliki ni dovoljeno spreminjati barve.",
 	    			    "Error",
