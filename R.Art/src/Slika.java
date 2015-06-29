@@ -24,6 +24,9 @@ public class Slika extends JPanel{
 	int w = 0;
 	int h = 0;
 	int svetl;
+	int rdeca;
+	int zelena;
+	int modra;
 	
 	public Slika(int dolzina, int sirina){
 		super();
@@ -34,6 +37,9 @@ public class Slika extends JPanel{
 		sivina = false;
 		crno_belo = false;
 		svetl = 0;
+		rdeca = 100;
+		zelena = 100;
+		modra = 100;
 
 		
 	}
@@ -62,15 +68,15 @@ public class Slika extends JPanel{
 		repaint();
 	}
 	
-	   public void svetlost(BufferedImage s) {
+	   public void svetlostINbarva(BufferedImage s) {
 			BufferedImage novaSlika = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 			for (int y=0; y < s.getHeight(); y += 1) {
 				for (int x=0; x < s.getWidth(); x += 1) {
 					Color barva = new Color(s.getRGB(x, y));
 			
-					int r = Math.min(Math.max(0, barva.getRed()+svetl), 255);
-					int g = Math.min(Math.max(0, barva.getGreen()+svetl), 255);
-					int b = Math.min(Math.max(0, barva.getBlue()+svetl), 255);
+					int r = Math.min(Math.max(0, barva.getRed()*rdeca/100+svetl), 255);
+					int g = Math.min(Math.max(0, barva.getGreen()*zelena/100+svetl), 255);
+					int b = Math.min(Math.max(0, barva.getBlue()*modra/100+svetl), 255);
 					Color novaBarva = new Color(r,g,b);
 					novaSlika.setRGB(x, y, novaBarva.getRGB());
 					}
@@ -109,9 +115,14 @@ public class Slika extends JPanel{
 	
 	public void narisi() {
 		slika = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-		svetl = 0;
+		
 		sivina = false;
 		crno_belo = false;
+		svetl = 0;
+		rdeca = 100;
+		zelena = 100;
+		modra = 100;
+
 		
 		Runnable slikar = new Runnable() {
 			public void run() {

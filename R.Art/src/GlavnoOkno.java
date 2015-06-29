@@ -51,6 +51,9 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 	private JButton CrnoBelButton;
 	private JButton SivButton;
 	private JSlider SvetlostSlider;
+	private JSlider rSlider;
+	private JSlider gSlider;
+	private JSlider bSlider;
 
 	static final int FPS_MIN = -80;
 	static final int FPS_MAX = 80;
@@ -155,6 +158,71 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
     SvetlostSlider.setBorder(title);
 	
 	add(SvetlostSlider,c);
+	
+	c = new GridBagConstraints();
+	c.gridx = 2;
+	c.gridy = 6;
+	c.weightx = 2;
+	c.weighty = 1;
+    rSlider = new JSlider(JSlider.HORIZONTAL,0,100,100);
+    add(rSlider,c);
+	rSlider.addChangeListener(this);
+	rSlider.setMajorTickSpacing(20);
+	rSlider.setMinorTickSpacing(10);
+	rSlider.setPaintTicks(true);
+	rSlider.setPaintLabels(true);
+	
+    TitledBorder titleR;
+    titleR = BorderFactory.createTitledBorder("Rdeèa");
+    rSlider.setBorder(titleR);
+	
+    //add(new Label("Rdeèa"),c);
+    
+    
+   
+    
+	//c = new GridBagConstraints();
+	c.gridx = 3;
+	c.gridy = 6;
+	c.weightx = 2;
+	c.weighty = 1;
+    gSlider = new JSlider(JSlider.HORIZONTAL,0,100,100);
+    add(gSlider,c);
+	gSlider.addChangeListener(this);
+	gSlider.setMajorTickSpacing(20);
+	gSlider.setMinorTickSpacing(10);
+	gSlider.setPaintTicks(true);
+	gSlider.setPaintLabels(true);
+	
+    TitledBorder titleG;
+    titleG = BorderFactory.createTitledBorder("Zelena");
+    gSlider.setBorder(titleG);
+	
+    //add(new Label("Zelena"),c);
+    
+	//c = new GridBagConstraints();
+	c.gridx = 4;
+	c.gridy = 6;
+	c.weightx = 2;
+	c.weighty = 1;
+    bSlider = new JSlider(JSlider.HORIZONTAL,0,100,100);
+    add(bSlider,c);
+	bSlider.addChangeListener(this);
+	bSlider.setMajorTickSpacing(20);
+	bSlider.setMinorTickSpacing(10);
+	bSlider.setPaintTicks(true);
+	bSlider.setPaintLabels(true);
+	
+    TitledBorder titleB;
+    titleB = BorderFactory.createTitledBorder("Modra");
+    bSlider.setBorder(titleB);
+    
+//    TitledBorder titleC;
+//    titleC = BorderFactory.createTitledBorder("Vsebnost posamezne barve");
+//    c.setBorder(titleC);
+//	
+    //add(new Label("Modra"),c);
+	
 	}
 
 	public void stateChanged(ChangeEvent e) {
@@ -172,17 +240,71 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 	    	else{
 	        int svetl = (int)SvetlostSlider.getValue();
 	        slika.svetl = svetl;
-	        slika.svetlost(slika.original);
+	        slika.svetlostINbarva(slika.original);
 	    	}
 
 	    }
 	    }
-	}
+	    else if (e.getSource()==rSlider){
+	    	if (slika.crno_belo || slika.sivina){
+	    		//rSlider.setValue(100);
+	    		JOptionPane.showMessageDialog(null,
+	    			    "Èrno-beli ali sivi sliki ni dovoljeno spreminjati barve.",
+	    			    "Error",
+	    			    JOptionPane.ERROR_MESSAGE);
+	    		
+	    	}
+	    	else{
+		    if (!rSlider.getValueIsAdjusting()) {
+		        int rdeca = (int)rSlider.getValue();
+		        slika.rdeca = rdeca;
+		        slika.svetlostINbarva(slika.original);
+		    	}
+	    }
+	    }
+	    else if (e.getSource()==gSlider){
+		    if (!gSlider.getValueIsAdjusting()) {
+		    	if (slika.crno_belo || slika.sivina){
+		    		//gSlider.setValue(100);
+		    		JOptionPane.showMessageDialog(null,
+		    			    "Èrno-beli ali sivi sliki ni dovoljeno spreminjati barve.",
+		    			    "Error",
+		    			    JOptionPane.ERROR_MESSAGE);
+		    		
+		    	}
+		    	else{
+		        int zelena = (int)gSlider.getValue();
+		        slika.zelena = zelena;
+		        slika.svetlostINbarva(slika.original);
+		    	}
+		    }
+	    }
+	    else if (e.getSource()==bSlider){
+		    if (!bSlider.getValueIsAdjusting()) {
+		    	if (slika.crno_belo || slika.sivina){
+		    		//bSlider.setValue(100);
+		    		JOptionPane.showMessageDialog(null,
+		    			    "Èrno-beli ali sivi sliki ni dovoljeno spreminjati barve.",
+		    			    "Error",
+		    			    JOptionPane.ERROR_MESSAGE);
+		    		
+		    	}
+		    	else{
+		        int modra = (int)bSlider.getValue();
+		        slika.modra = modra;
+		        slika.svetlostINbarva(slika.original);
+		    	}
+		    }
+	    }
+	    }
 	
 
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource()==NarisiButton){
 			SvetlostSlider.setValue(0);
+			rSlider.setValue(100);
+			gSlider.setValue(100);
+			bSlider.setValue(100);
 			slika.narisi();
 			
 		}
@@ -202,9 +324,21 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 			}
 		}
 		else if (event.getSource() == CrnoBelButton){
+			rSlider.setValue(100);
+			gSlider.setValue(100);
+			bSlider.setValue(100);
+			slika.rdeca = 100;
+			slika.zelena = 100;
+			slika.modra = 100;
 			slika.crnoBela(slika.slika);
 		}
 		else if (event.getSource() == SivButton){
+			rSlider.setValue(100);
+			gSlider.setValue(100);
+			bSlider.setValue(100);
+			slika.rdeca = 100;
+			slika.zelena = 100;
+			slika.modra = 100;
 			slika.sivina(slika.slika);
 		}
 	}
