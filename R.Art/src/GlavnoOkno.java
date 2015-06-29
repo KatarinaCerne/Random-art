@@ -1,39 +1,19 @@
-//import java.awt.BorderLayout;
 import java.awt.Color;
-//import java.awt.Component;
 import java.awt.FileDialog;
-//import java.awt.Font;
 import java.awt.Frame;
-//import java.awt.GraphicsDevice;
-//import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-//import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//import java.awt.event.WindowEvent;
-//import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
-//import java.util.Hashtable;
-
-
 import java.util.Hashtable;
-
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-//import javax.swing.BorderFactory;
-//import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-//import javax.swing.JLabel;
-//import javax.swing.JOptionPane;
-//import javax.swing.JSlider;
-//import javax.swing.border.TitledBorder;
-//import javax.swing.event.ChangeEvent;
-//import javax.swing.event.ChangeListener;
 import javax.swing.JSlider;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
