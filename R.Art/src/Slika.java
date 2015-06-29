@@ -76,6 +76,7 @@ public class Slika extends JPanel{
 		repaint();
 	}
 	
+	
 	   public void svetlostINbarva(BufferedImage s) {
 		   //spremeni svetlost in vsebnost posamezne barve
 			BufferedImage novaSlika = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);

@@ -122,7 +122,7 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 		c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.CENTER;
-		c.gridx = 3;
+		c.gridx = 4;
 		c.gridy = 3;
 		c.weightx = 2;
 		c.weighty = 1;
@@ -135,7 +135,7 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 4;
-		c.gridy = 3;
+		c.gridy = 2;
 		c.weightx = 2;
 		c.weighty = 1;
 		RazveljaviButton = new JButton("Razveljavi spremembe!");
@@ -144,10 +144,11 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
     
 		//slider za svetlost
 		c = new GridBagConstraints();
-		c.gridx = 2;
+		c.gridx = 3;
 		c.gridy = 5;
 		c.weightx = 2;
 		c.weighty = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
 		SvetlostSlider = new JSlider(JSlider.HORIZONTAL,
 				FPS_MIN, FPS_MAX, FPS_INIT);
 		SvetlostSlider.addChangeListener(this);
@@ -172,6 +173,7 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 	
 		//slider za rdeèo
 		c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
 		c.gridy = 6;
 		c.weightx = 2;

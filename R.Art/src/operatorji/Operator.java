@@ -33,37 +33,18 @@ public static Operator ustvari_operator(int globina){
 			
 	}
 	int stevilo = random.nextInt(11);
-	if (stevilo == 0){
-		return new Vsota(globina-1);
-	}
-	if (stevilo == 1){
-		return new Produkt(globina-1);
-	}
-	if (stevilo == 2){
-		return new Krog(globina-1);
-	}
-	if (stevilo == 3){
-		return new Sinus(globina-1);
-	}
-	if (stevilo == 4){
-	return new Sotor(globina-1);
-    }
-    if (stevilo == 5){
-    	return new Vodnjak(globina-1);
-    }
-    if (stevilo == 6){
-    	return new Level(globina-1);
-    }
-    if (stevilo == 7){
-    	return new Sinus2(globina-1);
-    }
-      if (stevilo == 8){
-      	return new ArcTan(globina-1);
-      }
-      if (stevilo == 9){
-      	return new Tan(globina-1);
-      }
-		return new Mix(globina-1);
+	if (stevilo == 0) return new Vsota(globina-1);
+	if (stevilo == 1) return new Produkt(globina-1);
+	if (stevilo == 2) return new Krog(globina-1);
+	
+	if (stevilo == 3) return new Sinus(globina-1);
+	if (stevilo == 4) return new Sotor(globina-1);
+    if (stevilo == 5) return new Vodnjak(globina-1);
+    if (stevilo == 6) return new Level(globina-1);
+    if (stevilo == 7) return new Sinus2(globina-1);
+    if (stevilo == 8) return new ArcTan(globina-1);
+    if (stevilo == 9) return new Tan(globina-1);
+	return new Mix(globina-1);
 }
 }
 
