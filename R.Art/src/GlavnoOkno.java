@@ -17,19 +17,29 @@ import java.io.File;
 import java.io.IOException;
 //import java.util.Hashtable;
 
+
+import java.util.Hashtable;
+
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 //import javax.swing.BorderFactory;
 //import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 //import javax.swing.JLabel;
 //import javax.swing.JOptionPane;
 //import javax.swing.JSlider;
 //import javax.swing.border.TitledBorder;
 //import javax.swing.event.ChangeEvent;
 //import javax.swing.event.ChangeListener;
+import javax.swing.JSlider;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class GlavnoOkno extends JFrame implements ActionListener {
+public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener {
 
 	/**
 	 * 
@@ -40,7 +50,12 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	private JButton ShraniButton;
 	private JButton CrnoBelButton;
 	private JButton SivButton;
+	private JSlider SvetlostSlider;
 
+	static final int FPS_MIN = -80;
+	static final int FPS_MAX = 80;
+	static final int FPS_INIT = 0; 
+	
 	public GlavnoOkno() {
 		super();
 		this.getContentPane().setBackground(new Color(235, 255, 255));
@@ -109,13 +124,65 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		SivButton = new JButton("Siva!");
 		SivButton.addActionListener(this);
 		add(SivButton, c);
-	}
     
+	//slider za svetlost
+	c = new GridBagConstraints();
+	c.gridx = 2;
+	c.gridy = 5;
+	c.weightx = 2;
+	c.weighty = 1;
+	SvetlostSlider = new JSlider(JSlider.HORIZONTAL,
+            FPS_MIN, FPS_MAX, FPS_INIT);
+	SvetlostSlider.addChangeListener(this);
+	SvetlostSlider.setMajorTickSpacing(10);
+	SvetlostSlider.setMinorTickSpacing(10);
+	SvetlostSlider.setPaintTicks(true);
+	SvetlostSlider.setPaintLabels(true);
 	
+	
+//	Font font = new Font("Serif", Font.ITALIC, 12);
+//	SvetlostSlider.setFont(font);
+	
+	Hashtable labelTable = new Hashtable();
+	labelTable.put( new Integer( FPS_MIN ), new JLabel("Temna") );
+	//labelTable.put( new Integer( FPS_INIT ), new JLabel("Original") );
+	labelTable.put( new Integer( FPS_MAX ), new JLabel("Svetla") );
+	SvetlostSlider.setLabelTable( labelTable );
+	SvetlostSlider.setPaintLabels(true);
+	
+    TitledBorder title;
+    title = BorderFactory.createTitledBorder("Svetlost");
+    SvetlostSlider.setBorder(title);
+	
+	add(SvetlostSlider,c);
+	}
 
+	public void stateChanged(ChangeEvent e) {
+	    //JSlider source = (JSlider)e.getSource();
+	    if (e.getSource()==SvetlostSlider){
+	    if (!SvetlostSlider.getValueIsAdjusting()) {
+	    	if (slika.crno_belo){
+	    		//SvetlostSlider.setValue(0);
+	    		JOptionPane.showMessageDialog(null,
+	    			    "Èrno-beli sliki ni dovoljeno spreminjati svetlobe.",
+	    			    "Error",
+	    			    JOptionPane.ERROR_MESSAGE);
+	    		
+	    	}
+	    	else{
+	        int svetl = (int)SvetlostSlider.getValue();
+	        slika.svetl = svetl;
+	        slika.svetlost(slika.original);
+	    	}
+
+	    }
+	    }
+	}
+	
 
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource()==NarisiButton){
+			SvetlostSlider.setValue(0);
 			slika.narisi();
 			
 		}
@@ -141,6 +208,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			slika.sivina(slika.slika);
 		}
 	}
+
 
 
 	

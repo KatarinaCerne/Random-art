@@ -23,14 +23,17 @@ public class Slika extends JPanel{
 	boolean crno_belo;
 	int w = 0;
 	int h = 0;
+	int svetl;
 	
 	public Slika(int dolzina, int sirina){
 		super();
 		this.slika = new BufferedImage(dolzina, sirina, BufferedImage.TYPE_INT_RGB);
+		this.original = new BufferedImage(dolzina, sirina, BufferedImage.TYPE_INT_RGB);
 		w = dolzina;
 		h = sirina;
 		sivina = false;
 		crno_belo = false;
+		svetl = 0;
 
 		
 	}
@@ -59,7 +62,22 @@ public class Slika extends JPanel{
 		repaint();
 	}
 	
-
+	   public void svetlost(BufferedImage s) {
+			BufferedImage novaSlika = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+			for (int y=0; y < s.getHeight(); y += 1) {
+				for (int x=0; x < s.getWidth(); x += 1) {
+					Color barva = new Color(s.getRGB(x, y));
+			
+					int r = Math.min(Math.max(0, barva.getRed()+svetl), 255);
+					int g = Math.min(Math.max(0, barva.getGreen()+svetl), 255);
+					int b = Math.min(Math.max(0, barva.getBlue()+svetl), 255);
+					Color novaBarva = new Color(r,g,b);
+					novaSlika.setRGB(x, y, novaBarva.getRGB());
+					}
+				}
+			slika = novaSlika;
+			repaint();	
+		}
 	
 	public int rgb(double[] rgb_vektor) {
 		int r = Math.max(0, Math.min(255,(int)(128*(rgb_vektor[0]+1))));
@@ -84,13 +102,14 @@ public class Slika extends JPanel{
 				double v = y * 2.0/slika.getHeight() - 1.0;
 				int rgb = rgb(operator.eval(u, v));
 				slika.setRGB(x, y, rgb);
+				original.setRGB(x, y, rgb);
 			}
 		}
 	}
 	
 	public void narisi() {
 		slika = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-		
+		svetl = 0;
 		sivina = false;
 		crno_belo = false;
 		
