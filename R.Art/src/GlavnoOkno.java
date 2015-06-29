@@ -54,6 +54,7 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 	private JSlider rSlider;
 	private JSlider gSlider;
 	private JSlider bSlider;
+	private JButton RazveljaviButton;
 
 	static final int FPS_MIN = -80;
 	static final int FPS_MAX = 80;
@@ -127,6 +128,18 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 		SivButton = new JButton("Siva!");
 		SivButton.addActionListener(this);
 		add(SivButton, c);
+		
+		//gumb za razveljavi
+		c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.CENTER;
+		c.gridx = 4;
+		c.gridy = 3;
+		c.weightx = 2;
+		c.weighty = 1;
+		RazveljaviButton = new JButton("Razveljavi spremembe!");
+		RazveljaviButton.addActionListener(this);
+		add(RazveljaviButton, c);
     
 	//slider za svetlost
 	c = new GridBagConstraints();
@@ -340,6 +353,20 @@ public class GlavnoOkno extends JFrame implements ActionListener,ChangeListener 
 			slika.zelena = 100;
 			slika.modra = 100;
 			slika.sivina(slika.slika);
+		}
+		
+		else if (event.getSource() == RazveljaviButton){
+			slika.crno_belo = false;
+			slika.sivina = false;
+			slika.rdeca = 100;
+			slika.zelena = 100;
+			slika.modra = 100;
+			slika.svetl = 0;
+			SvetlostSlider.setValue(0);
+			rSlider.setValue(100);
+			gSlider.setValue(100);
+			bSlider.setValue(100);
+			slika.razveljavi(slika.slika);
 		}
 	}
 

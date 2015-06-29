@@ -21,6 +21,7 @@ public class Slika extends JPanel{
 	BufferedImage original;
 	boolean sivina;
 	boolean crno_belo;
+	private BufferedImage zacetna;
 	int w = 0;
 	int h = 0;
 	int svetl;
@@ -32,6 +33,7 @@ public class Slika extends JPanel{
 		super();
 		this.slika = new BufferedImage(dolzina, sirina, BufferedImage.TYPE_INT_RGB);
 		this.original = new BufferedImage(dolzina, sirina, BufferedImage.TYPE_INT_RGB);
+		this.zacetna = new BufferedImage(dolzina, sirina, BufferedImage.TYPE_INT_RGB);
 		w = dolzina;
 		h = sirina;
 		sivina = false;
@@ -65,6 +67,19 @@ public class Slika extends JPanel{
 		g.drawImage(s, 0, 0, null); 
 		g.dispose();
 		crno_belo = true;
+		repaint();
+	}
+	
+	public void razveljavi(BufferedImage s){
+		BufferedImage novaSlika = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		for (int y=0; y < s.getHeight(); y += 1) {
+			for (int x=0; x < s.getWidth(); x += 1) {
+				Color barva = new Color(zacetna.getRGB(x, y));
+				novaSlika.setRGB(x, y, barva.getRGB());
+				}
+			}
+		slika = novaSlika;
+		original = novaSlika;
 		repaint();
 	}
 	
@@ -109,6 +124,7 @@ public class Slika extends JPanel{
 				int rgb = rgb(operator.eval(u, v));
 				slika.setRGB(x, y, rgb);
 				original.setRGB(x, y, rgb);
+				zacetna.setRGB(x, y, rgb);
 			}
 		}
 	}
