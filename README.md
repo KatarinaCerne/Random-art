@@ -10,6 +10,7 @@ Random Art je program, ki riše abstraktne umetniške slike. (več informacij na
 ### Kaj repozitorij vsebuje? ###
 
 Znotraj mape R.Art je src, ki vsebuje:
+
 * `GlavniProgram.java`
 * `GlavnoOkno.java`- vsebuje vse v zvezi z grafičnim vmesnikom
 * `Slika.java` - vsebuje funkcije za računanje, risanje in preoblikovanje slike
